@@ -1,29 +1,31 @@
 const video = document.getElementById("video");
 const durationEl = document.getElementById("duration");
-const minLengthEl = document.getElementById("minLength");
+// const minLengthEl = document.getElementById("minLength");
 const makeVideoBtn = document.getElementById("makeVideoBtn");
 const playBtn = document.getElementById("playVideoBtn");
 
 let cuts = [];
-let duration, minLength;
+let duration
 
 makeVideoBtn.addEventListener("click", () => {
     duration = +durationEl.value;
-    minLength = +minLengthEl.value;
     getCuts();
 })
 
 function getCuts() {
-    let origDuration = Math.floor(video.duration) - minLength;
+    let origDuration = Math.floor(video.duration);
 
     let cutLength = 0;
     while (cutLength < duration) {
         let cutAt = Math.random() * origDuration + 1;
-
         let durationLeft = duration - cutLength;
-        let currDuration = minLength;
-        if(durationLeft > minLength) {
-            currDuration = Math.random() * (2 - minLength + 1) + minLength;
+        let maxDuration = 0.2 * duration;
+        let minDuration = 0.25;
+        let currDuration = minDuration;
+    
+        if(durationLeft > minDuration) {
+            
+            currDuration = Math.random() * (maxDuration - minDuration) + minDuration;
         }
         cuts.push({
             start: cutAt,
