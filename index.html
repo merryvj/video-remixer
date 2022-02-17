@@ -8,11 +8,20 @@
 </head>
 <body>
    <div class="wrapper">
-    <video id="video" src="videos/penguins.mp4">
+       <h1>TLDW (too long; didn't watch)</h1> 
+    <video id="video" src="videos/Penguins.mp4">
         
     </video>
 
     <div id="controls">
+        <label> Video:</label>
+        <select id="videoSelector" name="videos">
+            <option value="penguins">Penguins</option>
+            <option value="dance">Dancer</option>
+            <option value="duke">Duke</option>
+            <option value="trailer">Trailer</option>
+        </select>
+        <label> Duration:</label>
         <input type="number" id="duration"/>
         <!-- <input type="range" id="minLength" min="0" step="0.25" max="3" value="0.5"/> -->
         <button id="makeVideoBtn">Generate!</button>

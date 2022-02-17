@@ -1,4 +1,5 @@
 const video = document.getElementById("video");
+const videoSelector = document.getElementById("videoSelector");
 const durationEl = document.getElementById("duration");
 // const minLengthEl = document.getElementById("minLength");
 const makeVideoBtn = document.getElementById("makeVideoBtn");
@@ -12,6 +13,10 @@ makeVideoBtn.addEventListener("click", () => {
     getCuts();
 })
 
+videoSelector.addEventListener("change", (e) => {
+    video.src = `videos/${e.target.value}.mp4`;
+})
+
 function getCuts() {
     let origDuration = Math.floor(video.duration);
 
@@ -19,7 +24,7 @@ function getCuts() {
     while (cutLength < duration) {
         let cutAt = Math.random() * origDuration + 1;
         let durationLeft = duration - cutLength;
-        let maxDuration = 0.2 * duration;
+        let maxDuration = 0.25 * duration;
         let minDuration = 0.25;
         let currDuration = minDuration;
     
@@ -35,6 +40,7 @@ function getCuts() {
         cutLength+=currDuration;
     }
 
+    cuts.sort((a, b) => (a.start > b.start) ? 1 : -1)
     console.log(cuts);
 }
 
@@ -62,10 +68,9 @@ function startVideo() {
 }
 
 function playUntilNextCut(i){
-    let delay = cuts[i].length * 1000;
     setTimeout(() => {  
         video.currentTime = cuts[i].start;
-        console.log(delay);
+        console.log(cuts[i].start);
         video.play();
-    }, delay * (i + 1));
+    }, (cuts[i].length * 1000) * (i + 1));
 }
