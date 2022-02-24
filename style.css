@@ -6,3 +6,9 @@
 video {
     width: 100%;
 }
+
+#progressBar{
+    height: 5px;
+    width: 10px;
+    color: green;
+}
